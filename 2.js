@@ -1,14 +1,26 @@
 var arr1 = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
 
-function countOccurrences(arr, elem) {
-    var count = 0;
+function mostFrequentElement(arr) {
+    var frequency = {};
+    var maxCount = 0;
+    var mostFrequent;
+
     for (var i = 0; i < arr.length; i++) {
-        if (arr[i] === elem) {
-            count++;
+        var elem = arr[i];
+        if (frequency[elem] == null) {
+            frequency[elem] = 1;
+        } else {
+            frequency[elem]++;
+        }
+
+        if (frequency[elem] > maxCount) {
+            maxCount = frequency[elem];
+            mostFrequent = elem;
         }
     }
-    return count;
+
+    return { element: mostFrequent, count: maxCount };
 }
 
-var result2 = countOccurrences(arr1, 'a');
-console.log(result2 + ' ( ' + result2 + ' times )'); // Output: a ( 5 times )
+var result2 = mostFrequentElement(arr1);
+console.log(result2.element + ' ( ' + result2.count + ' times )');
